@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CategoryComponent } from './components/category.component';
 import { CategoryItemComponent } from './components/category-item.component';
 import { ItemDetailsComponent } from './components/item-details.component';
-import { StarWarsService }  from './starwars.service'
-import {HttpClientModule} from '@angular/common/http';
+import { StarWarsService } from './starwars.service'
+import { RoutingModule } from './app.routing'
 
 @NgModule({
   declarations: [
@@ -17,7 +18,9 @@ import {HttpClientModule} from '@angular/common/http';
 
   ],
   imports: [
-    BrowserModule, HttpClientModule
+    BrowserModule,
+    HttpClientModule,
+    RoutingModule
   ],
   providers: [StarWarsService],
   bootstrap: [AppComponent]
