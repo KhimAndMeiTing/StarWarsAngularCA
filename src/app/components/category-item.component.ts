@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+
 
 @Component({
   selector: 'app-category-item',
@@ -9,7 +10,16 @@ export class CategoryItemComponent implements OnInit {
 
   constructor() { }
 
+  initName = "category-item works!"
+
+  name = 'category-item'
+
   ngOnInit() {
   }
 
+  @Output() sendToParent:EventEmitter<string> = new EventEmitter<string>();
+
+  passNameToParent(){
+    this.sendToParent.emit(this.name);
+  }
 }
