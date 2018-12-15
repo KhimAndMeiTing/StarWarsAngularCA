@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor(private router:Router, private _location: Location){}
+
   title = 'StarWarsAngularCA';
+  goToCategoryItem(){
+    this.router.navigate(['categoryItems'])
+  }
+  goBack() {
+    this._location.back();
+  }
 }

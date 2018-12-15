@@ -5,9 +5,12 @@
   </h1>
 <p>Hello World</p>
 
-<app-category></app-category>
+<router-outlet></router-outlet>
 <app-category-item></app-category-item>
 <app-item-details></app-item-details>
 
-<router-outlet></router-outlet>
+<button (click)="goToCategoryItem()">Click to route</button>
+<button (click)="goBack()">Go Back</button>
+
+
 
