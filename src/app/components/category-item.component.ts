@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { StarWarsService } from '../starwars.service';
 
 
 @Component({
@@ -8,13 +9,15 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class CategoryItemComponent implements OnInit {
 
-  constructor() { }
+  constructor(private starwarservice: StarWarsService) { }
 
   initName = "category-item works!"
 
   name = 'category-item'
 
   ngOnInit() {
+    this.initName = this.starwarservice.childInput
+    console.log(this.initName)
   }
 
   @Output() sendToParent:EventEmitter<string> = new EventEmitter<string>();

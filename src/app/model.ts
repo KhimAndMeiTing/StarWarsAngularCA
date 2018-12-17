@@ -119,7 +119,7 @@ export interface Vehicle{
             "cargo_capacity": "50000", 
             "consumables": "2 months", 
             "vehicle_class": "wheeled", 
-            "pilots": [], 
+            pilots: string[], 
             "films": [
                 "https://swapi.co/api/films/5/", 
                 "https://swapi.co/api/films/1/"
@@ -140,7 +140,7 @@ export interface Starship{
             "hyperdrive_rating": "2.0", 
             "MGLT": "40", 
             "starship_class": "Star dreadnought", 
-            "pilots": [], 
+            pilots: string[], 
             "films": [
                 "https://swapi.co/api/films/2/", 
                 "https://swapi.co/api/films/3/"

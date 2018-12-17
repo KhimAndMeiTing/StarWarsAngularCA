@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Planet } from './model'
+import { CategoryFactory } from './factory.item';
 
 
 const BASE_URL = 'https://swapi.co/api/';
 
 @Injectable()
 export class StarWarsService {
+    
     constructor(private http: HttpClient) { }
+
+    childInput: string = ''
+
+    setChildInput(input:string){
+        this.childInput = input
+    }
 
     getAllCategories() {
         return (
@@ -35,21 +43,9 @@ export class StarWarsService {
             this.http.get(BASE_URL + category, { params: qs })
                 .toPromise()
                 .then(result => {
-                    var items: Planet[] = []
+                    var items= new CategoryFactory(category).getInterface()
                     for(let r of result['results']) {
-                        items.push({
-                            name: r.name ,
-                            rotation_period:r.rotation_period, 
-                            orbital_period: r.orbital_period,
-                            diameter: r.diameter,
-                            climate: r.climate,
-                            gravity: r.gravity, 
-                            terrain: r.terrain, 
-                            surface_water: r.surface_water,
-                            population: r.population, 
-                            residents: r.residents,
-                            films: r.films
-                        });
+                        items.push(r);
                     console.log(items)
                     };
 
@@ -72,5 +68,7 @@ export class StarWarsService {
     getItemDetails(){
         
     }
+
+    
 
 }
