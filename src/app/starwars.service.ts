@@ -9,15 +9,15 @@ const BASE_URL = 'https://swapi.co/api/';
 
 @Injectable()
 export class StarWarsService {
-
+    
     constructor(private http: HttpClient) { }
     itemSelected: string = ''
 
-    private _itemSource = new BehaviorSubject<number>(0);
-    navItem$ = this._itemSource.asObservable();
+    private _itemSource = new BehaviorSubject<string>('');
+    item$ = this._itemSource.asObservable();
 
     setItemSelected(input: string) {
-        this.itemSelected = input
+        this._itemSource.next(input)
     }
 
     getAllCategories() {
@@ -39,7 +39,6 @@ export class StarWarsService {
         category = 'people'
         var items = categoryFactory(category)
         let names = [];
-        let oneresp: JSON = JSON.parse('{}');
 
         const recursiveGet = (pageCount) => {
             const qs = new HttpParams()
@@ -50,7 +49,6 @@ export class StarWarsService {
                 .then(result => {
                     for (let r of result['results']) {
                         items.push(r);
-                        console.log(items)
                     };
 
                     var namesForOnepage = result['results'].map(x => x.name ? x.name : x.title)
@@ -59,7 +57,6 @@ export class StarWarsService {
                         return recursiveGet(++pageCount)
                 })
                 .catch(error => { console.log(error) })
-            console.log('respbody:' + names)
         }
 
         recursiveGet(pageCount);
