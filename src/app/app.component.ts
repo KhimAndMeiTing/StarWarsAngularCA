@@ -16,7 +16,7 @@ export class AppComponent {
   receivedName = '';
 
   goToCategoryItem(){
-    this.service.setChildInput('PLANEETSSSS')
+    this.service.setItemSelected('PLANNEETSS')
     this.router.navigate(['categoryItems'])
   }
   goBack() {

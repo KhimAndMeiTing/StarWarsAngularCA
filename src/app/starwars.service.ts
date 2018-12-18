@@ -36,7 +36,7 @@ export class StarWarsService {
     getCategoryItems(category: string) {
         let pageCount = 1;
 
-        category = 'people'
+        category = 'films'
         var items = categoryFactory(category)
         let names = [];
 
