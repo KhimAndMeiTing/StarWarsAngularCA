@@ -1,20 +1,18 @@
 import { Planet } from './model'
-export class CategoryFactory{
+import { People } from './model'
+import { Film } from './model'
+import { Vehicle } from './model'
+import { Starship } from './model'
+import { Species } from './model'
 
-    type:string;
-
-    constructor(type:string){
-        this.type = type
-        console.log(this.type)
-    }
-
-    getInterface(){
-        console.log(this.type==='planets')
-        switch(this.type){       
-            case 'planets':
-                var category: Planet[] = [];
-                return category
-        } 
+export var categoryFactory = (type:string)=>{
+    switch(type){
+        case '':
+            return new Array<Planet|People|Species|Film|Vehicle|Starship>();       
+        case 'planets':
+            return new Array<Planet>();
+        case 'people':               
+            return new Array<People>();
+        
     } 
-    
 }

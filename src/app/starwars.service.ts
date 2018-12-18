@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpParams } from '@angular/common/http'
-import { Planet } from './model'
-import { CategoryFactory } from './factory.item';
+import { BehaviorSubject } from 'rxjs';
+
+import { categoryFactory } from './factory.item';
 
 
 const BASE_URL = 'https://swapi.co/api/';
 
 @Injectable()
 export class StarWarsService {
-    
+
     constructor(private http: HttpClient) { }
+    itemSelected: string = ''
 
-    childInput: string = ''
+    private _itemSource = new BehaviorSubject<number>(0);
+    navItem$ = this._itemSource.asObservable();
 
-    setChildInput(input:string){
-        this.childInput = input
+    setItemSelected(input: string) {
+        this.itemSelected = input
     }
 
     getAllCategories() {
@@ -33,42 +36,41 @@ export class StarWarsService {
     getCategoryItems(category: string) {
         let pageCount = 1;
 
-        category = 'planets'
+        category = 'people'
+        var items = categoryFactory(category)
         let names = [];
         let oneresp: JSON = JSON.parse('{}');
 
         const recursiveGet = (pageCount) => {
             const qs = new HttpParams()
-                .set('page', pageCount.toString()) 
+                .set('page', pageCount.toString())
+
             this.http.get(BASE_URL + category, { params: qs })
                 .toPromise()
                 .then(result => {
-                    var items= new CategoryFactory(category).getInterface()
-                    for(let r of result['results']) {
+                    for (let r of result['results']) {
                         items.push(r);
-                    console.log(items)
+                        console.log(items)
                     };
 
-                    var namesForOnepage = result['results'].map(x => x['name'])
+                    var namesForOnepage = result['results'].map(x => x.name ? x.name : x.title)
                     names.push(...namesForOnepage)
-                    //console.log(names)
-                    // console.log('next:'+result['next'])
-                    if(result['next'])
+                    if (result['next'])
                         return recursiveGet(++pageCount)
                 })
-                .catch(error => { console.log(error) })          
-            
+                .catch(error => { console.log(error) })
+            console.log('respbody:' + names)
         }
 
         recursiveGet(pageCount);
-        console.log('respbody:'+names)
+
         return names;
     }
 
-    getItemDetails(){
-        
+    getItemDetails() {
+
     }
 
-    
+
 
 }
