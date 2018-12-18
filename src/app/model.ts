@@ -1,5 +1,3 @@
-//interface codes here
-
 export interface People {
     name: string,
     height: number,
@@ -76,22 +74,19 @@ export interface Vehicle {
 }
 
 export interface Starship {
-    "name": "Executor",
-    "model": "Executor-class star dreadnought",
-    "manufacturer": "Kuat Drive Yards, Fondor Shipyards",
-    "cost_in_credits": "1143350000",
-    "length": "19000",
-    "max_atmosphering_speed": "n/a",
-    "crew": "279144",
-    "passengers": "38000",
-    "cargo_capacity": "250000000",
-    "consumables": "6 years",
-    "hyperdrive_rating": "2.0",
-    "MGLT": "40",
-    "starship_class": "Star dreadnought",
-    pilots: string[],
-    "films": [
-        "https://swapi.co/api/films/2/",
-        "https://swapi.co/api/films/3/"
-    ],
+    name: string
+    model: string
+    manufacturer: string
+    cost_in_credits: number
+    length: number
+    max_atmosphering_speed: string
+    crew: number
+    passengers: number
+    cargo_capacity: number
+    consumables: string
+    hyperdrive_rating: number
+    MGLT: number
+    starship_class: string
+    pilots: string[]
+    films: string[]
 }

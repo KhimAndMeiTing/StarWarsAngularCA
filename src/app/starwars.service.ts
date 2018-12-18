@@ -6,15 +6,18 @@ import { categoryFactory } from './factory.item';
 
 
 const BASE_URL = 'https://swapi.co/api/';
+var items = [];
 
 @Injectable()
 export class StarWarsService {
     
     constructor(private http: HttpClient) { }
-    itemSelected: string = ''
 
+    itemSelected: string = ''
     private _itemSource = new BehaviorSubject<string>('');
     item$ = this._itemSource.asObservable();
+
+
 
     setItemSelected(input: string) {
         this._itemSource.next(input)
@@ -50,13 +53,18 @@ export class StarWarsService {
                     for (let r of result['results']) {
                         items.push(r);
                     };
-
+                    result['results'].forEach(x => {
+                        console.log(x.name? x.name : x.title)
+                    });
                     var namesForOnepage = result['results'].map(x => x.name ? x.name : x.title)
                     names.push(...namesForOnepage)
                     if (result['next'])
                         return recursiveGet(++pageCount)
+                    console.log(names)
+                    console.log(items)
                 })
                 .catch(error => { console.log(error) })
+
         }
 
         recursiveGet(pageCount);
@@ -64,10 +72,18 @@ export class StarWarsService {
         return names;
     }
 
-    getItemDetails() {
+    getItemDetails(category,id) {
+        //check items index if blank
+        //if !blank get from items array
+        //if blank go to url
 
+        //map urls to page name/title + id
+        //display the rest
     }
 
+    addComments(category,id){
+        //create dexiejs
+    }
 
 
 }

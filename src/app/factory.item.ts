@@ -13,6 +13,7 @@ export var categoryFactory = (type:string)=>{
             return new Array<Planet>();
         case 'people':               
             return new Array<People>();
-        
+        case 'films':
+            return new Array<Film>();
     } 
 }
