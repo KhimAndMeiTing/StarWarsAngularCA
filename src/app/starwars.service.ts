@@ -18,7 +18,6 @@ export class StarWarsService {
     item$ = this._itemSource.asObservable();
 
 
-
     setItemSelected(input: string) {
         this._itemSource.next(input)
     }
@@ -39,7 +38,6 @@ export class StarWarsService {
     getCategoryItems(category: string) {
         let pageCount = 1;
 
-        category = 'films'
         var items = categoryFactory(category)
         let names = [];
 
@@ -53,15 +51,10 @@ export class StarWarsService {
                     for (let r of result['results']) {
                         items.push(r);
                     };
-                    result['results'].forEach(x => {
-                        console.log(x.name? x.name : x.title)
-                    });
                     var namesForOnepage = result['results'].map(x => x.name ? x.name : x.title)
                     names.push(...namesForOnepage)
                     if (result['next'])
                         return recursiveGet(++pageCount)
-                    console.log(names)
-                    console.log(items)
                 })
                 .catch(error => { console.log(error) })
 
