@@ -15,5 +15,11 @@ export var categoryFactory = (type:string)=>{
             return new Array<People>();
         case 'films':
             return new Array<Film>();
+        case 'vehicles':
+            return new Array<Vehicle>();    
+        case 'species':
+            return new Array<Species>();
+        case 'starship':
+            return new Array<Starship>();
     } 
 }
