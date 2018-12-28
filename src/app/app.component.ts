@@ -10,13 +10,13 @@ import { StarWarsService } from './starwars.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private router:Router, private _location: Location, private service: StarWarsService){}
+  constructor(private router:Router, private _location: Location, private starwarservice: StarWarsService){}
 
   title = 'StarWarsAngularCA';
   receivedName = '';
 
   goToCategoryItem(){
-    this.service.setItemSelected('PLANNEETSS')
+    this.starwarservice.setItemSelected('PLANNEETSS')
     this.router.navigate(['categoryItems'])
   }
   goBack() {

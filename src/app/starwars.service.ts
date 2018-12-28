@@ -26,12 +26,6 @@ export class StarWarsService {
         return (
             this.http.get(BASE_URL)
                 .toPromise()
-                .then(result => {
-                    var categories: string[] = [];
-                    for (var s in result)
-                        categories.push(s);
-                    return categories;
-                })
         );
     }
 
