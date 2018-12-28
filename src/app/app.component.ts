@@ -27,6 +27,10 @@ export class AppComponent {
     this.service.getCategoryItems('planets')
   }
 
+  getItemDetails(){
+    this.service.getItemDetails('films',2)
+  }
+
   receiveNameFromChild($event:string){
     this.receivedName = $event
   }
