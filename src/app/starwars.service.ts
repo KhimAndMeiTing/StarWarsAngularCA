@@ -89,38 +89,86 @@ export class StarWarsService {
             return Promise.resolve(items[id])
         else {
             let itemDetail = null;
-            this.http.get(BASE_URL + category + "/" + id)
-                .toPromise()
-                .then(res => {
-                    itemDetail = res
-                    Object.entries(itemDetail).forEach(
-                        ([key, value]) => {
-                            if (Array.isArray(value)) {
-                                console.log(value)
-                                let newValue = value.forEach(i =>
-                                    this.http.get(i)
-                                        .toPromise()
-                                        .then(
-                                            result => {
-                                                var jsonData ={}
-                                                jsonData[result['name']] = i
-                                                console.log(jsonData)
-                                                return jsonData
-                                            }
 
-                                        ))
-                                
-                            }
-                        }
-                    );
-                    // console.log(itemDetail)
-                    return Promise.resolve(itemDetail)
+            const getNames = async (url)=>{
+                var tempObj = {}
+                this.http.get(url).toPromise()
+                .then((resp)=>{
+                    tempObj[resp['name']] = url
                 })
+                console.log("tempObj")
+                console.log(tempObj)
+                await tempObj
+            }
+
+            this.http.get(BASE_URL + category + "/" + id)
+            .toPromise()
+            .then((res)=>{return itemDetail = {...res}})
+            .then((result)=>{
+                console.log('result:::' + result)
+                Object.entries(result).forEach(([key, value]) => {
+                    var tempObj = {}
+                    if (Array.isArray(value)) {
+                        let itemArray = [];
+                        value.forEach(url => {
+
+                            console.log("getNames(url)")
+                            console.log(getNames(url))
+                        })
+                    }
+                })
+                
+            })
+
+            
+
+
+            // this.http.get(BASE_URL + category + "/" + id)
+            //     .toPromise()
+            //     .then(res => {
+            //         return Promise.all([res, (res) => {
+            //             itemDetail = { ...res }
+            //             // console.log("itemDtails:" + itemDetail)
+            //             // Object.entries(itemDetail).forEach(
+            //             //     ([key, value]) => {
+            //             //         if (Array.isArray(value)) {
+            //             //             let itemArray = [];
+
+            //             //             let newValue = value.forEach(i =>
+            //             //                 this.http.get(i)
+            //             //                     .toPromise()
+            //             //                     .then(
+            //             //                         result => {
+            //             //                             var jsonData = {}
+            //             //                             jsonData[result['name']] = i
+            //             //                             itemArray.push(jsonData)
+            //             //                             //console.log(itemArray)
+            //             //                             return jsonData
+            //             //                         }
+
+            //             //                     ))
+            //             //             itemDetail[key] = itemArray
+
+            //             //         }
+
+            //             //     }
+            //             // );
+            //             return itemDetail
+            //         }
+
+
+            //         ])
+            //     })
+            //     .then((results)=>{
+            //         console.log("results::: "+results)
+            //     })
 
         }
         //map urls to page name/title + id
         //display the rest
     }
+
+
 
     addComments(category, id) {
         //create dexiejs
