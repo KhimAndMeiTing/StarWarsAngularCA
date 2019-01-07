@@ -90,85 +90,51 @@ export class StarWarsService {
         else {
             let itemDetail = null;
 
-            const getNames = async (url)=>{
-                var tempObj = {}
-                this.http.get(url).toPromise()
-                .then((resp)=>{
-                    tempObj[resp['name']] = url
-                })
-                console.log("tempObj")
-                console.log(tempObj)
-                await tempObj
-            }
-
             this.http.get(BASE_URL + category + "/" + id)
             .toPromise()
             .then((res)=>{return itemDetail = {...res}})
             .then((result)=>{
                 console.log('result:::' + result)
-                Object.entries(result).forEach(([key, value]) => {
-                    var tempObj = {}
-                    if (Array.isArray(value)) {
-                        let itemArray = [];
-                        value.forEach(url => {
-
-                            console.log("getNames(url)")
-                            console.log(getNames(url))
-                        })
-                    }
-                })
+                console.log(result)
+                this.getNames(result)
+                // Object.entries(result).forEach(([key, value]) => {
+                //     var tempObj = {}
+                //     if (Array.isArray(value)) {
+                //         let itemArray = [];
+                //         value.forEach(url => {
+                //             console.log("getNames(url)")
+                //             let name = this.getNames(url)
+                //             console.log(name)
+                //         })
+                //     }
+                // })
                 
             })
-
-            
-
-
-            // this.http.get(BASE_URL + category + "/" + id)
-            //     .toPromise()
-            //     .then(res => {
-            //         return Promise.all([res, (res) => {
-            //             itemDetail = { ...res }
-            //             // console.log("itemDtails:" + itemDetail)
-            //             // Object.entries(itemDetail).forEach(
-            //             //     ([key, value]) => {
-            //             //         if (Array.isArray(value)) {
-            //             //             let itemArray = [];
-
-            //             //             let newValue = value.forEach(i =>
-            //             //                 this.http.get(i)
-            //             //                     .toPromise()
-            //             //                     .then(
-            //             //                         result => {
-            //             //                             var jsonData = {}
-            //             //                             jsonData[result['name']] = i
-            //             //                             itemArray.push(jsonData)
-            //             //                             //console.log(itemArray)
-            //             //                             return jsonData
-            //             //                         }
-
-            //             //                     ))
-            //             //             itemDetail[key] = itemArray
-
-            //             //         }
-
-            //             //     }
-            //             // );
-            //             return itemDetail
-            //         }
-
-
-            //         ])
-            //     })
-            //     .then((results)=>{
-            //         console.log("results::: "+results)
-            //     })
 
         }
         //map urls to page name/title + id
         //display the rest
     }
 
+    async getNames(urls){
+        Object.entries(urls).forEach(async ([key, value]) => {
+            var tempObj = {}
+            if (Array.isArray(value)) {
+                let itemArray = [];
+                value.forEach(async url => {
+                    console.log("getNames(url)")
+                    let name = this.http.get(url).toPromise().then(resp=>resp)
+                    console.log(name)
+                })
+            }
+        })
+    }
 
+    getPicture(category, id){
+        if(category==='people')
+            category = 'characters'
+        return `https://starwars-visualguide.com/assets/img/${category}/${id}.jpg`
+    }
 
     addComments(category, id) {
         //create dexiejs
