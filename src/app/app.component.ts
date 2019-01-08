@@ -14,7 +14,7 @@ export class AppComponent {
 
   title = 'StarWarsAngularCA';
   receivedName = '';
-
+  
   goToCategoryItem(){
     this.starwarservice.setItemSelected('PLANNEETSS')
     this.router.navigate(['categoryItems'])
@@ -24,7 +24,7 @@ export class AppComponent {
   }
   
   getCategoryItems(){
-    this.service.getCategoryItems('planets')
+    this.starwarservice.getCategoryItems('planets')
   }
 
   receiveNameFromChild($event:string){
