@@ -3,7 +3,7 @@ import { StarWarsService } from '../starwars.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { timingSafeEqual } from 'crypto';
+// import { timingSafeEqual } from 'crypto';
 
 
 @Component({

@@ -27,6 +27,10 @@ export class AppComponent {
     this.starwarservice.getCategoryItems('planets')
   }
 
+  getItemDetails(){
+    this.starwarservice.getItemDetails('films',2)
+  }
+
   receiveNameFromChild($event:string){
     this.receivedName = $event
   }
