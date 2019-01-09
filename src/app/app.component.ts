@@ -28,7 +28,7 @@ export class AppComponent {
   }
 
   getItemDetails(){
-    this.starwarservice.getItemDetails('films',2)
+    this.starwarservice.getItemDetails('films',2 ,1)
   }
 
   receiveNameFromChild($event:string){
