@@ -61,7 +61,7 @@ export class StarWarsService {
     return Promise.resolve(items);
   }
 
-  getItemDetails(category, page, id) {
+  getItemDetails(category, page, id): Promise<Planet | People | Species | Film | Vehicle | Starship> {
     category = "films";
     id = 2;
     let cid = id/page + 1;
