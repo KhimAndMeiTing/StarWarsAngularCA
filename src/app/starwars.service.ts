@@ -70,7 +70,7 @@ export class StarWarsService {
     else {
       let itemDetail = null;
 
-      this.http
+      return this.http
         .get(BASE_URL + category + "/" + cid)
         .toPromise()
         .then(res => {
@@ -85,11 +85,11 @@ export class StarWarsService {
         .then(newobj => {
             console.log('getdetails:::newobj')
             console.log(newobj)
-        
+            return Promise.resolve(itemDetail)
         })
         .catch(err => console.log(err));
 
-        return Promise.resolve(itemDetail)
+        
     }
 
   }
