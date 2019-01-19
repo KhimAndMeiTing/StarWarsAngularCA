@@ -25,18 +25,19 @@ export class StarWarsService {
     this._itemSource.next(input);
   }
 
-  getAllCategories() {    
-    return Promise.resolve(this.http.get(BASE_URL)
+  getAllCategories(){    
+    let categoryArray = [];
+    return this.http.get(BASE_URL)
                   .toPromise()
-                  .then(categories=>{
-                    let categoryArray = [];
+                  .then(categories => {
                     for(let key in categories){
-                      let cat = {};
-                      cat['name'] = key;
+                      let cat = {'name': key};
                       categoryArray.push(cat)
                     }
+                    console.log(categoryArray)
                     return Promise.resolve(categoryArray)
-                  }));
+                  }).catch(err=> console.log(err));
+    
   }
 
   getCategoryItems(category: string, pageCount = 1):
