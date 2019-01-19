@@ -4,7 +4,22 @@ import {StarWarsService} from '../starwars.service'
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-
+export interface Category {
+  name: string;
+  
+}
+const ELEMENT_DATA: Category[] = [
+  { name: 'Hydrogen'},
+  { name: 'Helium'},
+  {name: 'Lithium'},
+  {name: 'Beryllium'},
+  {name: 'Boron'},
+  { name: 'Carbon'},
+  { name: 'Nitrogen'},
+  { name: 'Oxygen'},
+  {name: 'Fluorine'},
+  {name: 'Neon'},
+];
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -24,21 +39,16 @@ export class CategoryComponent {
             this.cat.push(key)
           }
       })
-      
-      
-   
     
   }
+  // displayedColumns: string[] = ['cat'];
+  // dataSource = this.cat;
   goToCategoryItem(){
      this.starwarservice.setItemSelected('PLANNEETSS');
      this.router.navigate(['categoryItems']);
   }
- 
-  // categories = [ {category: 'Characters'},
-  // {category: 'Films'},
-  // {category: 'Species'},
-  // {category: 'Starship'},
-  // {category: 'Vehicles'},
-  // {category: 'Planets'}];
-
+  displayedColumns: string[] = [ 'name'];
+  dataSource = ELEMENT_DATA;
+  
+  
 }
