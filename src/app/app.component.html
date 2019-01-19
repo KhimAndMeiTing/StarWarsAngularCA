@@ -6,10 +6,6 @@
 <p>Hello World</p>
 
 <router-outlet></router-outlet>
-<app-category-item (sendToParent)="receiveNameFromChild($event)"></app-category-item>
-<p>{{receivedName}}</p>
-<app-item-details></app-item-details>
-
 
 <button (click)="goToCategoryItem()">Click to route</button>
 <button (click)="goBack()">Go Back</button>

@@ -30,15 +30,13 @@ export class CategoryComponent {
     
   }
   goToCategoryItem(){
-     this.starwarservice.setItemSelected('PLANNEETSS');
+     this.starwarservice.setItemSelected('planets');
      this.router.navigate(['categoryItems']);
   }
- 
   // categories = [ {category: 'Characters'},
   // {category: 'Films'},
   // {category: 'Species'},
   // {category: 'Starship'},
   // {category: 'Vehicles'},
   // {category: 'Planets'}];
-
 }

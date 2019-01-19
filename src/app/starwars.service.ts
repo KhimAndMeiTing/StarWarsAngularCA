@@ -30,14 +30,11 @@ export class StarWarsService {
   }
 
   getCategoryItems(category: string, pageCount = 1):
-   Promise<(Planet | People | Species | Film | Vehicle | Starship)[]> {
-    
-
+   Promise<(Planet | People | Species | Film | Vehicle | Starship)[]> 
+   {
     var items = categoryFactory(category);
     let names = [];
-
     const qs = new HttpParams().set("page", pageCount.toString());
-
     this.http
       .get(BASE_URL + category, { params: qs })
       .toPromise()
@@ -51,14 +48,13 @@ export class StarWarsService {
         var namesForOnepage = result["results"].map(x =>
           x.name ? x.name : x.title
         );
-        names.push(...namesForOnepage);
-        
+        names.push(...namesForOnepage);    
       })
       .catch(error => {
         console.log(error);
       });
 
-    return Promise.resolve(items);
+        return Promise.resolve(items);
   }
 
   getItemDetails(category, page, id): Promise<Planet | People | Species | Film | Vehicle | Starship> {
@@ -127,7 +123,7 @@ export class StarWarsService {
     return `https://starwars-visualguide.com/assets/img/${category}/${cid}.jpg`;
   }
 
-  addComments(category, id) {
+  addComments(category,id) {
     //create dexiejs
   }
 }

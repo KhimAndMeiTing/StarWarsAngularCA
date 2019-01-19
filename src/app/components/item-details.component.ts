@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import { StarWarsService } from '../starwars.service';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-item-details',
   templateUrl: './item-details.component.html',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,private _location:
+    Location, private starwarservice: StarWarsService) {
+  }
 
   ngOnInit() {
+    
   }
 
 }
