@@ -4,6 +4,7 @@ import { StarWarsService } from "../starwars.service";
 
 import { Router } from "@angular/router";
 import { Location } from "@angular/common";
+// import { element } from "../../../node_modules/@angular/core/src/render3/instructions";
 
 
 
@@ -16,18 +17,7 @@ export class CategoryComponent {
   cat = [];
   displayedColumns: string[] = ["name"];
   dataSource;
-  ELEMENT_DATA = [
-    { name: "Hydrogen" },
-    { name: "Helium" },
-    { name: "Lithium" },
-    { name: "Beryllium" },
-    { name: "Boron" },
-    { name: "Carbon" },
-    { name: "Nitrogen" },
-    { name: "Oxygen" },
-    { name: "Fluorine" },
-    { name: "Neon" }
-  ];
+  selectedRowIndex;
 
   constructor(
     private router: Router,
@@ -43,10 +33,15 @@ export class CategoryComponent {
     
     
   }
-  // displayedColumns: string[] = ['cat'];
-  // dataSource = this.cat;
-  goToCategoryItem() {
-    this.starwarservice.setItemSelected("planets");
+ 
+  // goToCategoryItem() {
+  //   this.starwarservice.setItemSelected("planets");
+  //   this.router.navigate(["categoryItems"]);
+  // }
+  highlight(row){
+    this.selectedRowIndex = row.name;
+    this.starwarservice.setItemSelected(this.selectedRowIndex);
     this.router.navigate(["categoryItems"]);
-  }
+    console.log(this.selectedRowIndex)
+    }
 }
