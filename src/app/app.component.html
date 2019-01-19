@@ -7,11 +7,16 @@
 
 <router-outlet></router-outlet>
 
-<button (click)="goToCategoryItem()">Click to route</button>
-<button (click)="goBack()">Go Back</button>
+<button style="margin-right: 20px" mat-raised-button color="primary" margin-right="10" 
+(click)="goToCategoryItem()">Click to route</button>
+<span style="width: 10px"></span>
+<button mat-raised-button color="primary" style="margin-right: 20px"
+ (click)="goBack()">Go Back</button>
 
-<button (click)="getCategoryItems()">Test Api getCategoryItems()</button>
-<button (click)="getItemDetails()">Test Api getItemDetails()</button>
+<button mat-raised-button color="accent" style="margin-right: 20px"
+(click)="getCategoryItems()">Test Api getCategoryItems()</button>
+<button mat-raised-button color="primary" style="margin-right: 20px"
+(click)="getItemDetails()">Test Api getItemDetails()</button>
 
 
 

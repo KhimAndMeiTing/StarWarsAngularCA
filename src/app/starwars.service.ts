@@ -25,13 +25,26 @@ export class StarWarsService {
     this._itemSource.next(input);
   }
 
-  getAllCategories() {
-    return Promise.resolve(this.http.get(BASE_URL).toPromise());
+  getAllCategories(){    
+    let categoryArray = [];
+    return this.http.get(BASE_URL)
+                  .toPromise()
+                  .then(categories => {
+                    for(let key in categories){
+                      let cat = {'name': key};
+                      categoryArray.push(cat)
+                    }
+                    console.log(categoryArray)
+                    return Promise.resolve(categoryArray)
+                  }).catch(err=> console.log(err));
+    
   }
 
   getCategoryItems(category: string, pageCount = 1):
-   Promise<(Planet | People | Species | Film | Vehicle | Starship)[]> 
-   {
+   Promise<(Planet | People | Species | Film | Vehicle | Starship)[]> {
+    
+
+
     var items = categoryFactory(category);
     let names = [];
     const qs = new HttpParams().set("page", pageCount.toString());
@@ -48,13 +61,14 @@ export class StarWarsService {
         var namesForOnepage = result["results"].map(x =>
           x.name ? x.name : x.title
         );
-        names.push(...namesForOnepage);    
+        names.push(...namesForOnepage);
+        return Promise.resolve(items)
       })
       .catch(error => {
         console.log(error);
       });
 
-        return Promise.resolve(items);
+      return Promise.resolve(items);
   }
 
   getItemDetails(category, page, id): Promise<Planet | People | Species | Film | Vehicle | Starship> {

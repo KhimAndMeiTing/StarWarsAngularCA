@@ -16,7 +16,7 @@ export class AppComponent {
   receivedName = '';
   
   goToCategoryItem(){
-    this.starwarservice.setItemSelected('PLANNEETSS')
+    this.starwarservice.setItemSelected('planets')
     this.router.navigate(['categoryItems'])
   }
   goBack() {
