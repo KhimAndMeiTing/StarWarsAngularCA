@@ -14,9 +14,10 @@ export class AppComponent {
 
   title = 'StarWarsAngularCA';
   receivedName = '';
+  data = []
   
   goToCategoryItem(){
-    this.starwarservice.setItemSelected('PLANNEETSS')
+    this.starwarservice.setItemSelected('planets')
     this.router.navigate(['categoryItems'])
   }
   goBack() {
@@ -24,7 +25,12 @@ export class AppComponent {
   }
   
   getCategoryItems(){
-    this.starwarservice.getCategoryItems('planets')
+    this.starwarservice.getCategoryItems('planets').then(result=>{
+      this.data.push(result)
+    })
+    
+    console.log('this.data')
+    console.log(this.data)
   }
 
   getItemDetails(){

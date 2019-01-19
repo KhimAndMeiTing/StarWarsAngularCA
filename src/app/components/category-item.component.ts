@@ -17,22 +17,23 @@ export class CategoryItemComponent implements OnInit {
   item: string;
   initName = "category-item works!"
 
-  name = 'category-item'
+  name : Object
   subscription: Subscription
-  info: string[]=[];
+  info: any[];
 
 
   ngOnInit() {
     this.subscription = this.starwarservice.item$
        .subscribe(item => this.name = item)
+    this.starwarservice.
+       getCategoryItems(this.name['name']).then((result)=>{
+         this.info = result;
+       });
   }
 
   constructor(private router:Router, private _location: 
     Location,private starwarservice: StarWarsService) { 
-    // starwarservice.
-    // getCategoryItems(this.item).then((result)=>{
-    //   this.info = result;
-    // });
+
     
     
   }
