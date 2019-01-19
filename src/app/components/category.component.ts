@@ -23,14 +23,13 @@ export class CategoryComponent {
           for(var key in result){
             this.cat.push(key)
           }
-      })
-      
+      })      
       
    
     
   }
   goToCategoryItem(){
-     this.starwarservice.setItemSelected('PLANNEETSS');
+     this.starwarservice.setItemSelected('planets');
      this.router.navigate(['categoryItems']);
   }
  
