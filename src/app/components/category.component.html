@@ -1,12 +1,17 @@
 <div>
-    <table border="1" width="50%" align="center">
-        <tr>
-            <th >Category</th>
-            
-        </tr>
-        <tr *ngFor="let element of cat">
-            <td (click)="goToCategoryItem()">{{element}}</td>
-        </tr>
-    </table>
+        <table width="40%" align="center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <ng-container matColumnDef="name">
+                        <th align="center" mat-header-cell *matHeaderCellDef> Category. </th>
+                        <td  mat-cell *matCellDef="let element" 
+                         > {{element.name}} </td>
+                </ng-container>      
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"
+                ></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+                [ngClass]="{highlighted: selectedRowIndex == row.name}"  (click)="highlight(row)"          
+                  ></tr>    
+        </table>
+        <!-- <facebook-login-button  (socialUser)="getSocialUser($event)"></facebook-login-button> -->
+ 
+<facebook-share-button [share]="shareObj" ></facebook-share-button>
 </div>
-<p>hello world</p>

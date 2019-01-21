@@ -23,7 +23,14 @@ import { MatFormFieldModule } from '@angular/material'
 import { MatInputModule } from '@angular/material'
 import { MatSelectModule } from '@angular/material'
 import { MatSortModule } from '@angular/material'
-
+import {
+  Ng6SocialButtonModule,SocialServiceConfig
+} from "ng6-social-button";
+export function getAuthServiceConfigs() {
+  let config = new SocialServiceConfig()
+      .addFacebook("378570392952824")     
+  return config;
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,9 +59,15 @@ import { MatSortModule } from '@angular/material'
     MatInputModule,
     MatSelectModule,
     MatSortModule,
+    Ng6SocialButtonModule
  
   ],
-  providers: [StarWarsService],
+  providers: [
+    StarWarsService,
+    {
+      provide: SocialServiceConfig,
+      useFactory: getAuthServiceConfigs
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
