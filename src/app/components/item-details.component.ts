@@ -28,6 +28,7 @@ export class ItemDetailsComponent implements OnInit {
   itemDetails;
   picture: string;
   category: string;
+  title: string
 
   constructor(private starwarsservice: StarWarsService, router: Router, private _location: Location) {}
 
@@ -51,6 +52,7 @@ export class ItemDetailsComponent implements OnInit {
       //   let itemDetailProp = {}
       //   itemDetailProp[key] = itemdetail[key]
         this.itemDetails = itemdetail;
+        this.title = itemdetail.name ? itemdetail.name : itemdetail.title
         console.log('itemdetailssss:::')
         console.log(this.itemDetails)
       })

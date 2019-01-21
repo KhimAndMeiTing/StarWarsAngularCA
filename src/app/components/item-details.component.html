@@ -1,10 +1,10 @@
-<h1>item-details title!</h1>
+<h1>{{title}}</h1>
 <img src="{{ picture }}" />
 
 <table>
   <tbody style="border: 1px solid black;">
     <tr *ngFor="let entry of itemDetails | keyvalue" style="border: 1px solid black;">
-      <td style="border: 1px solid black;">{{entry.key}}</td>
+      <td style="border: 1px solid black;">{{entry.key.charAt(0).toUpperCase() + entry.key.substr(1)}}</td>
       <td style="border: 1px solid black;">
         <div *ngIf="isIterable(entry.value)">
             <table >
