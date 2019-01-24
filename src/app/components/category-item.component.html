@@ -1,16 +1,17 @@
-<p (click)="passNameToParent()">
-  {{name}}
-</p>
 <div>
   <table  border="1" width="80%" align="center" >
       
       <tr>
           <th >Category Items</th>
       </tr>
-      <tr *ngFor="let element of cat">
-          <td >{{element}}</td>
+      <tr *ngFor="let element of categoryItems">
+          <td >{{element.name}}</td>
       </tr>
   </table>
   of data, depending on the trigger that opened it:
 
+</div>
+<div>
+    <button>Previous</button>
+    <button>Next</button>
 </div>

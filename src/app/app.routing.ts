@@ -1,12 +1,14 @@
-import { RouterModule, Routes } from '@angular/router';
-import { ModuleWithProviders } from '@angular/core' 
-import { CategoryComponent } from './components/category.component';
-import { CategoryItemComponent } from './components/category-item.component';
+import { RouterModule, Routes } from "@angular/router";
+import { ModuleWithProviders } from "@angular/core";
+import { CategoryComponent } from "./components/category.component";
+import { CategoryItemComponent } from "./components/category-item.component";
+import { ItemDetailsComponent } from "./components/item-details.component";
 
-const routes: Routes= [
-    { path: "categories" , component: CategoryComponent },
-    { path: "categoryItems", component: CategoryItemComponent },
-    { path: '',  redirectTo: '/categories', pathMatch: 'full' },
+const routes: Routes = [
+  { path: "categories", component: CategoryComponent },
+  { path: "categoryItems", component: CategoryItemComponent },
+  { path: "itemDetail", component: ItemDetailsComponent },
+  { path: "", redirectTo: "/categories", pathMatch: "full" }
 ];
 
-export const RoutingModule: ModuleWithProviders = RouterModule.forRoot(routes)
+export const RoutingModule: ModuleWithProviders = RouterModule.forRoot(routes);
