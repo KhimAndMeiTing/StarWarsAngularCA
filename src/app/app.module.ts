@@ -26,6 +26,9 @@ import { MatSortModule } from '@angular/material'
 import {
   Ng6SocialButtonModule,SocialServiceConfig
 } from "ng6-social-button";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { KeysPipe } from './pipe.transform';
 export function getAuthServiceConfigs() {
   let config = new SocialServiceConfig()
       .addFacebook("378570392952824")     
@@ -37,7 +40,7 @@ export function getAuthServiceConfigs() {
     CategoryComponent,
     CategoryItemComponent,
     ItemDetailsComponent,
-    
+    KeysPipe,
    
   ],
   imports: [
@@ -59,7 +62,9 @@ export function getAuthServiceConfigs() {
     MatInputModule,
     MatSelectModule,
     MatSortModule,
-    Ng6SocialButtonModule
+    Ng6SocialButtonModule,
+    
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
  
   ],
   providers: [
