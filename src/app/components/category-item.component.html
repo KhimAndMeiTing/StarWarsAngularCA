@@ -4,11 +4,10 @@
       <tr>
           <th >Category Items</th>
       </tr>
-      <tr *ngFor="let element of categoryItems">
-          <td >{{element.name}}</td>
+      <tr *ngFor="let element of categoryItems; index as i">
+          <td (click)="goToItemDetail(element.category, 1 , i)">{{element.name}}</td>
       </tr>
   </table>
-  of data, depending on the trigger that opened it:
 
 </div>
 <div>

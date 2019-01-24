@@ -44,8 +44,8 @@ export class ItemDetailsComponent implements OnInit {
     console.log('itemdetailssss:::')
     console.log(this.itemDetails)
     
-    //this.starwarsservice.getItemDetails(this.item['category'], this.item['page'], this.item['id'])
-    this.starwarsservice.getItemDetails(this.category, page, id).then(itemdetail => {
+    this.starwarsservice.getItemDetails(this.item['category'], this.item['page'], this.item['id']).then(itemdetail => {
+    //this.starwarsservice.getItemDetails(this.category, page, id).then(itemdetail => {
       // console.log('itemdetail:::')
       // console.log(itemdetail)
       // Object.keys(itemdetail).forEach(key=>{
@@ -61,8 +61,8 @@ export class ItemDetailsComponent implements OnInit {
     // });
 
 
-    //this.picture = this.starwarsservice.getPicture(this.item['category'], this.item['page'], this.item['id'])
-    this.picture = this.starwarsservice.getPicture(this.category, page, id);
+    this.picture = this.starwarsservice.getPicture(this.item['category'], this.item['page'], this.item['id'])
+    //this.picture = this.starwarsservice.getPicture(this.category, page, id);
   }
 
   goBack(){
