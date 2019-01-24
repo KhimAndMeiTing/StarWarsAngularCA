@@ -17,7 +17,9 @@ export class CategoryItemComponent implements OnInit {
 
   category: Object;
   subscription: Subscription;
+  pageSubscription: Subscription;
   categoryItems;
+  pageCount: number
 
   ngOnInit() {
     this.subscription = this.starwarservice.item$.subscribe(
@@ -25,7 +27,7 @@ export class CategoryItemComponent implements OnInit {
     );
     this.categoryItems = categoryFactory(this.category.toString());
     this.starwarservice
-      .getCategoryItems(this.category.toString())
+      .getCategoryItems(this.category.toString(), this.pageCount)
       .then(result => {
         this.categoryItems = result;
       });
@@ -35,5 +37,28 @@ export class CategoryItemComponent implements OnInit {
     private router: Router,
     private _location: Location,
     private starwarservice: StarWarsService
-  ) {}
+  ) {
+    this.pageCount = 1
+  }
+
+  onNextPage(){
+    this.pageCount++;
+    this.starwarservice
+      .getCategoryItems(this.category.toString(), this.pageCount)
+      .then(result => {
+        this.categoryItems = result;
+        console.log(this.categoryItems)
+      });
+  }
+  onPreviousPage(){
+    if(this.pageCount > 1 ){
+      this.pageCount--;
+      this.starwarservice
+        .getCategoryItems(this.category.toString(), this.pageCount)
+        .then(result => {
+          this.categoryItems = result;
+          console.log(this.categoryItems)
+        });
+    }
+  }
 }

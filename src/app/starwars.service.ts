@@ -17,9 +17,10 @@ var items = [];
 export class StarWarsService {
   constructor(private http: HttpClient) {}
 
-  itemSelected: string = "";
   private _itemSource = new BehaviorSubject<Object>("");
   item$ = this._itemSource.asObservable();
+
+  
 
   setItemSelected(input: Object) {
     this._itemSource.next(input);

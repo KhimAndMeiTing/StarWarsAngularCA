@@ -12,6 +12,6 @@
 
 </div>
 <div>
-    <button>Previous</button>
-    <button>Next</button>
+    <button (click)="onPreviousPage()" [disabled]="pageCount < 2">Previous</button>
+    <button (click)="onNextPage()" >Next</button>
 </div>
