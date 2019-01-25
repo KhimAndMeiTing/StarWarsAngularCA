@@ -4,7 +4,7 @@ import { Subscription } from "rxjs";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { categoryFactory } from "../factory.item";
-// import { timingSafeEqual } from 'crypto';
+
 
 @Component({
   selector: "app-category-item",
@@ -12,7 +12,6 @@ import { categoryFactory } from "../factory.item";
   styleUrls: ["./category-item.component.css"]
 })
 export class CategoryItemComponent implements OnInit {
-  //item: string[]=[];
   item: string;
 
   category: Object;
@@ -25,6 +24,10 @@ export class CategoryItemComponent implements OnInit {
     // this.subscription = this.starwarservice.item$.subscribe(
     //   item => (this.category = item)
     // );
+    console.log('HI')
+    this.route.params.subscribe(params => {
+      this.category = params['cat']
+    })
     this.categoryItems = categoryFactory(this.category.toString());
     this.starwarservice
       .getCategoryItems(this.category.toString(), this.pageCount)
