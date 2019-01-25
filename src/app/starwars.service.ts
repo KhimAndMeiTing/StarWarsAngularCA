@@ -40,14 +40,14 @@ export class StarWarsService {
   }
 
   getCategoryItems(category: string, pageCount = 1):
-   Promise<(Planet | People | Species | Film | Vehicle | Starship)[]> {
+   Promise<(Planet | People | Species | Film | Vehicle | Starship)[] |void> {
     
     let items = categoryFactory(category);
     let data = [];
 
     const qs = new HttpParams().set("page", pageCount.toString());
 
-    this.http
+    return this.http
       .get(BASE_URL + category, { params: qs })
       .toPromise()
       .then(result => {
@@ -62,14 +62,11 @@ export class StarWarsService {
           }
         });
         data.push(...oneDataItem);
-        console.log(data)
         return Promise.resolve(data)
       })
       .catch(error => {
         console.log(error);
       });
-
-      return Promise.resolve(data);
   }
 
   getItemDetails(category="films", page=1, id=2) {
@@ -85,19 +82,13 @@ export class StarWarsService {
           return (itemDetail = { ...res });
         })
         .then(result => {
-          console.log("result:::" + result);
-          console.log(result);
           itemDetail = this.getNames(result)
           return this.getNames(result);
         })
         .then(newobj => {
-            console.log('getdetails:::newobj')
-            console.log(newobj)
             return Promise.resolve(itemDetail)
         })
-        .catch(err => console.log(err));
-
-        
+        .catch(err => console.log(err)); 
     }
 
   }
@@ -107,10 +98,7 @@ export class StarWarsService {
     Object.entries(itemDetailObj).forEach(async ([key, value]) => {     
       if (Array.isArray(value)) {
         var tempArray = [];
-        console.log('key::' + key)
         value.forEach(async url => {
-          console.log("getNames(url)");
-          console.log(url);
           this.http
             .get(url)
             .toPromise()

@@ -17,11 +17,6 @@ import { KeysPipe } from "../pipe.transform";
   templateUrl: "./item-details.component.html",
   styleUrls: ["./item-details.component.css"]
 })
-// interface IncomingSubscription{
-//   category: string
-//   page: number
-//   id: number
-// }
 export class ItemDetailsComponent implements OnInit {
   subscription: Subscription;
   item: Object;
@@ -37,32 +32,12 @@ export class ItemDetailsComponent implements OnInit {
     this.subscription = this.starwarsservice.item$.subscribe(
       item => (this.item = item)
     );
-     
-    this.category = "films";
-    let page = 2;
-    let id = 2;
-    console.log('itemdetailssss:::')
-    console.log(this.itemDetails)
     
     this.starwarsservice.getItemDetails(this.item['category'], this.item['page'], this.item['id']).then(itemdetail => {
-    //this.starwarsservice.getItemDetails(this.category, page, id).then(itemdetail => {
-      // console.log('itemdetail:::')
-      // console.log(itemdetail)
-      // Object.keys(itemdetail).forEach(key=>{
-      //   let itemDetailProp = {}
-      //   itemDetailProp[key] = itemdetail[key]
         this.itemDetails = itemdetail;
         this.title = itemdetail.name ? itemdetail.name : itemdetail.title
-        console.log('itemdetailssss:::')
-        console.log(this.itemDetails)
       })
-      
-      
-    // });
-
-
     this.picture = this.starwarsservice.getPicture(this.item['category'], this.item['page'], this.item['id'])
-    //this.picture = this.starwarsservice.getPicture(this.category, page, id);
   }
 
   goBack(){

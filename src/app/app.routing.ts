@@ -6,7 +6,7 @@ import { ItemDetailsComponent } from "./components/item-details.component";
 
 const routes: Routes = [
   { path: "categories", component: CategoryComponent },
-  { path: "categoryItems", component: CategoryItemComponent },
+  { path: "categoryItems/:cat/:page", component: CategoryItemComponent },
   { path: "itemDetail", component: ItemDetailsComponent },
   { path: "", redirectTo: "/categories", pathMatch: "full" }
 ];
