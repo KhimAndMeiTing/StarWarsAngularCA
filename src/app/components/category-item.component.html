@@ -1,14 +1,20 @@
-<!-- <p (click)="passNameToParent()">
-  {{name}}
-</p> -->
 <div>
-  <table width="50%" align="center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef='name'>
-      <th mat-header-cell *matHeaderCellDef> Category Item </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container> 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+  <table width="40%" align="center" mat-table [dataSource]="datasource" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+            <th align="center" mat-header-cell *matHeaderCellDef> Name </th>
+            <td  mat-cell *matCellDef="let element; index as id" (click)="goToItemDetail(element.category, 1 , id)"
+             > {{element.name}} </td>
+    </ng-container>      
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"
+    ></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>    
-  </table>
-  </div>
-  
+</table>
+</div>
+<div>
+    <button (click)="onPreviousPage()" [disabled]="pageCount < 2">Previous</button>
+    <button (click)="onNextPage()" >Next</button>
+</div>
+<div>
+    <button (click)="goToCategoryItems()">Back to Categories</button>
+</div>
