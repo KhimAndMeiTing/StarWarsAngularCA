@@ -1,41 +1,84 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { StarWarsService } from '../starwars.service';
-import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
-// import { timingSafeEqual } from 'crypto';
+import { Component, OnInit, EventEmitter, Output } from "@angular/core";
+import { StarWarsService } from "../starwars.service";
+import { Subscription } from "rxjs";
+import { Router, ActivatedRoute } from "@angular/router";
+import { Location } from "@angular/common";
+import { categoryFactory } from "../factory.item";
 
 
 @Component({
-  selector: 'app-category-item',
-  templateUrl: './category-item.component.html',
-  styleUrls: ['./category-item.component.css']
+  selector: "app-category-item",
+  templateUrl: "./category-item.component.html",
+  styleUrls: ["./category-item.component.css"]
 })
 export class CategoryItemComponent implements OnInit {
-
-  //item: string[]=[];
   item: string;
-  initName = "category-item works!"
 
-  name : Object
-  subscription: Subscription
-  info: any[];
-
+  category: Object;
+  subscription: Subscription;
+  pageSubscription: Subscription;
+  categoryItems;
+  pageCount: number
 
   ngOnInit() {
-    this.subscription = this.starwarservice.item$
-       .subscribe(item => this.name = item)
-    this.starwarservice.
-       getCategoryItems(this.name['name']).then((result)=>{
-         this.info = result;
-       });
+    // this.subscription = this.starwarservice.item$.subscribe(
+    //   item => (this.category = item)
+    // );
+    console.log('HI')
+    this.route.params.subscribe(params => {
+      this.category = params['cat']
+    })
+    this.categoryItems = categoryFactory(this.category.toString());
+    this.starwarservice
+      .getCategoryItems(this.category.toString(), this.pageCount)
+      .then(result => {
+        this.categoryItems = result;
+      });
   }
 
-  constructor(private router:Router, private _location: 
-    Location,private starwarservice: StarWarsService) { 
-
-    
-    
+  constructor(
+    private router: Router,
+    private _location: Location,
+    private route: ActivatedRoute,
+    private starwarservice: StarWarsService
+  ) {
+    this.pageCount = 1
+    this.route.params.subscribe(params => {
+      this.category = params['cat']
+    })
   }
   
+  onNextPage(){
+    this.pageCount++;
+    this.starwarservice
+      .getCategoryItems(this.category.toString(), this.pageCount)
+      .then(result => {
+        this.categoryItems = result;
+      });
+    console.log(this.route.params['_value']['cat'])
+    this.router.navigate(["categoryItems", this.route.params['_value']['cat'], this.pageCount]);
+  }
+  onPreviousPage(){
+    if(this.pageCount > 1 ){
+      this.pageCount--;
+      this.starwarservice
+        .getCategoryItems(this.category.toString(), this.pageCount)
+        .then(result => {
+          this.categoryItems = result;
+        });
+    }
+  }
+
+  goToItemDetail(category:string, page=1, id){
+    this.starwarservice.setItemSelected({
+      category: category,
+      page: page,
+      id: id
+    });
+    this.router.navigate(["itemDetail"]);
+  }
+
+  goToCategoryItems(){
+    this.router.navigate(["categories"]);
+  }
 }
