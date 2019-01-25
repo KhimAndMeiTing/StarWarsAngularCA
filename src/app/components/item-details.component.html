@@ -1,4 +1,24 @@
-<p (click)="passNameToParent()">
-    {{name}}
+<h1>{{title}}</h1>
+<img src="{{ picture }}" />
 
-</p>
+<table>
+  <tbody style="border: 1px solid black;">
+    <tr *ngFor="let entry of itemDetails | keyvalue" style="border: 1px solid black;">
+      <td style="border: 1px solid black;">{{entry.key.charAt(0).toUpperCase() + entry.key.substr(1)}}</td>
+      <td style="border: 1px solid black;">
+        <div *ngIf="isIterable(entry.value)">
+            <table >
+                <tr *ngFor="let prop of entry.value">
+                    <td>{{prop}}</td>
+                </tr>
+              </table>
+        </div>
+        <div *ngIf="!isIterable(entry.value)">
+          <td>{{entry.value}}</td>
+        </div>       
+      </td>     
+    </tr>
+  </tbody>
+</table>
+
+<button (click)="goBack()">Back to {{ category }}</button>

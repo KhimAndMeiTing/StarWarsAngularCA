@@ -18,10 +18,10 @@ export class StarWarsService {
   constructor(private http: HttpClient) {}
 
   itemSelected: string = "";
-  private _itemSource = new BehaviorSubject<string>("");
+  private _itemSource = new BehaviorSubject<Object>("");
   item$ = this._itemSource.asObservable();
 
-  setItemSelected(input: string) {
+  setItemSelected(input: Object) {
     this._itemSource.next(input);
   }
 
@@ -34,19 +34,16 @@ export class StarWarsService {
                       let cat = {'name': key};
                       categoryArray.push(cat)
                     }
-                    console.log(categoryArray)
                     return Promise.resolve(categoryArray)
-                  }).catch(err=> console.log(err));
-    
+                  }).catch(err=> console.log(err));  
   }
 
   getCategoryItems(category: string, pageCount = 1):
    Promise<(Planet | People | Species | Film | Vehicle | Starship)[]> {
     
+    let items = categoryFactory(category);
+    let data = [];
 
-
-    var items = categoryFactory(category);
-    let names = [];
     const qs = new HttpParams().set("page", pageCount.toString());
     this.http
       .get(BASE_URL + category, { params: qs })
@@ -55,32 +52,31 @@ export class StarWarsService {
         for (let r of result["results"]) {
           items.push(r);
         }
-        result["results"].forEach(x => {
-          console.log(x.name ? x.name : x.title);
+        let oneDataItem = result["results"].map(x =>{
+          return {
+            'name': x.name ? x.name : x.title,
+            'category': category,
+            'page': pageCount
+          }
         });
-        var namesForOnepage = result["results"].map(x =>
-          x.name ? x.name : x.title
-        );
-        names.push(...namesForOnepage);
-        return Promise.resolve(items)
+        data.push(...oneDataItem);
+        console.log(data)
+        return Promise.resolve(data)
       })
       .catch(error => {
         console.log(error);
       });
 
-      return Promise.resolve(items);
+      return Promise.resolve(data);
   }
 
-  getItemDetails(category, page, id): Promise<Planet | People | Species | Film | Vehicle | Starship> {
-    category = "films";
-    id = 2;
+  getItemDetails(category="films", page=1, id=2) {
     let cid = id/page + 1;
-    console.log(items.length);
     if (items.length != 0) return Promise.resolve(items[id]);
     else {
       let itemDetail = null;
 
-      this.http
+      return this.http
         .get(BASE_URL + category + "/" + cid)
         .toPromise()
         .then(res => {
@@ -95,11 +91,11 @@ export class StarWarsService {
         .then(newobj => {
             console.log('getdetails:::newobj')
             console.log(newobj)
-        
+            return Promise.resolve(itemDetail)
         })
         .catch(err => console.log(err));
 
-        return Promise.resolve(itemDetail)
+        
     }
 
   }
