@@ -21,5 +21,8 @@ height:200px;" src="{{ picture }}" />
     </tr>
   </tbody>
 </table>
+<div style="padding-top: 1em">
+    <button mat-raised-button color="accent" style="margin-right: 20px"
+    (click)="goBack()" >Back to {{ category }}</button>   
+</div>
 
-<button (click)="goBack()">Back to {{ category }}</button>
