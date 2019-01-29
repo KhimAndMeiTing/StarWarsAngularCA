@@ -43,8 +43,9 @@ export class ItemDetailsComponent implements OnInit {
   goBack(){
     this._location.back();
   }
- isIterable = (object) =>
- { 
-   return object != null && typeof object !== 'string' && typeof object[Symbol.iterator] === 'function'}
+
+  
+
+  isIterable = (object) => object != null && typeof object !== 'string' && typeof object[Symbol.iterator] === 'function'
   
 }

@@ -1,9 +1,11 @@
 import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 import { StarWarsService } from "../starwars.service";
 import { Subscription } from "rxjs";
+import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { categoryFactory } from "../factory.item";
+import { DataSource } from "@angular/cdk/table";
 // import { timingSafeEqual } from 'crypto';
 
 @Component({
@@ -46,19 +48,19 @@ export class CategoryItemComponent implements OnInit {
     this.pageCount = 1
     this.route.params.subscribe(params => {
       this.category = params['cat']
+      this.pageCount = params['page'] || 1
     })
   }
   
   onNextPage(){
-
+    this.router.navigate(["categoryItems", this.route.params['_value']['cat'], this.pageCount]);
     this.pageCount++;
     this.starwarservice
       .getCategoryItems(this.category.toString(), this.pageCount)
       .then(result => {
-        this.categoryItems = result;
+        this.datasource = result;
       });
-    console.log(this.route.params['_value']['cat'])
-    this.router.navigate(["categoryItems", this.route.params['_value']['cat'], this.pageCount]);
+    
   }
   onPreviousPage(){
     if(this.pageCount > 1 ){
@@ -66,8 +68,9 @@ export class CategoryItemComponent implements OnInit {
       this.starwarservice
         .getCategoryItems(this.category.toString(), this.pageCount)
         .then(result => {
-          this.categoryItems = result;
+          this.datasource = result;
         });
+      this.router.navigate(["categoryItems", this.route.params['_value']['cat'], this.pageCount]);
     }
   }
 
