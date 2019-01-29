@@ -4,14 +4,6 @@ import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { Location } from '@angular/common';
 
-import { Planet } from "../model";
-import { People } from "../model";
-import { Film } from "../model";
-import { Vehicle } from "../model";
-import { Starship } from "../model";
-import { Species } from "../model";
-import { KeysPipe } from "../pipe.transform";
-
 @Component({
   selector: "app-item-details",
   templateUrl: "./item-details.component.html",
@@ -32,7 +24,6 @@ export class ItemDetailsComponent implements OnInit {
     this.subscription = this.starwarsservice.item$.subscribe(
       item => (this.item = item)
     );
-    
     this.starwarsservice.getItemDetails(this.item['category'], this.item['page'], this.item['id']).then(itemdetail => {
         this.itemDetails = itemdetail;
         this.title = itemdetail.name ? itemdetail.name : itemdetail.title

@@ -20,28 +20,29 @@ export class StarWarsService {
   private _itemSource = new BehaviorSubject<Object>("");
   item$ = this._itemSource.asObservable();
 
-  
-
   setItemSelected(input: Object) {
     this._itemSource.next(input);
   }
 
-  getAllCategories(){    
+  getAllCategories() {
     let categoryArray = [];
-    return this.http.get(BASE_URL)
-                  .toPromise()
-                  .then(categories => {
-                    for(let key in categories){
-                      let cat = {'name': key};
-                      categoryArray.push(cat)
-                    }
-                    return Promise.resolve(categoryArray)
-                  }).catch(err=> console.log(err));  
+    return this.http
+      .get(BASE_URL)
+      .toPromise()
+      .then(categories => {
+        for (let key in categories) {
+          let cat = { name: key };
+          categoryArray.push(cat);
+        }
+        return Promise.resolve(categoryArray);
+      })
+      .catch(err => console.log(err));
   }
 
-  getCategoryItems(category: string, pageCount = 1):
-   Promise<(Planet | People | Species | Film | Vehicle | Starship)[] |void> {
-    
+  getCategoryItems(
+    category: string,
+    pageCount = 1
+  ): Promise<(Planet | People | Species | Film | Vehicle | Starship)[] | void> {
     let items = categoryFactory(category);
     let data = [];
 
@@ -54,23 +55,47 @@ export class StarWarsService {
         for (let r of result["results"]) {
           items.push(r);
         }
-        let oneDataItem = result["results"].map(x =>{
+        let oneDataItem = result["results"].map(x => {
           return {
-            'name': x.name ? x.name : x.title,
-            'category': category,
-            'page': pageCount
-          }
+            name: x.name ? x.name : x.title,
+            category: category,
+            page: pageCount
+          };
         });
         data.push(...oneDataItem);
-        return Promise.resolve(data)
+        return Promise.resolve(data);
       })
       .catch(error => {
         console.log(error);
       });
   }
 
-  getItemDetails(category="films", page=1, id=2) {
-    let cid = id/page + 1;
+  getItemDetails(category = "films", page = 1, id = 2) {
+    console.log('id')
+    console.log(id)
+    let cid = (page - 1) * 10 + id + 1;
+    if (category === "planets") {
+      if (cid > 0) cid++;
+      if (cid == 61) cid = 1;
+      if (cid > 61) cid--;
+    }
+
+    if (category === "people") {
+      if (cid > 16) cid++;
+      if (cid > 34) cid++;
+      if (cid > 46) cid++;
+      if (cid > 75) cid--;
+      if (cid == 89) cid = 35;
+    }
+
+    if (category === "species") {
+      if (cid > 0) cid = cid + 4;
+      // if(page < 4)
+      //   cid = 7 * (1) + 10 * (4 - page - 1) + (10 - id - 1)
+      // else
+      //   cid = 7 - id - 1
+    }
+
     if (items.length != 0) return Promise.resolve(items[id]);
     else {
       let itemDetail = null;
@@ -82,51 +107,53 @@ export class StarWarsService {
           return (itemDetail = { ...res });
         })
         .then(result => {
-          itemDetail = this.getNames(result)
+          itemDetail = this.getNames(result);
           return this.getNames(result);
         })
         .then(newobj => {
-            return Promise.resolve(itemDetail)
+          return Promise.resolve(itemDetail);
         })
-        .catch(err => console.log(err)); 
+        .catch(err => console.log(err));
     }
-
   }
-z
+
   async getNames(itemDetailObj) {
     let newItemDetail = {};
-    Object.entries(itemDetailObj).forEach(async ([key, value]) => {     
+    Object.entries(itemDetailObj).forEach(async ([key, value]) => {
       if (Array.isArray(value)) {
         var tempArray = [];
         value.forEach(async url => {
           this.http
             .get(url)
             .toPromise()
-            .then(resp => {     
-                resp['name']? tempArray.push(resp['name']) : tempArray.push(resp['title'])
+            .then(resp => {
+              resp["name"]
+                ? tempArray.push(resp["name"])
+                : tempArray.push(resp["title"]);
             });
         });
-        newItemDetail[key] = tempArray
+        newItemDetail[key] = tempArray;
+      } else if (key !== "url") {
+        newItemDetail[key] = itemDetailObj[key];
       }
-      else if(key!=='url'){
-        newItemDetail[key] = itemDetailObj[key]
-      }
-      
     });
-    return newItemDetail
+    return newItemDetail;
   }
 
   getPicture(category, page, id) {
-    let cid = id/page + 1;
-    console.log('getpicture')
-    console.log(id)
-    console.log(cid)
-    if (category === "people") 
-        category = "characters";
+    let cid = (page - 1) * 10 + id + 1;
+    if (category === "people") {
+      if (cid > 16) cid++;
+      if (cid > 34) cid++;
+      if (cid > 46) cid++;
+      if (cid > 75) cid--;
+      if (cid == 89) cid = 35;
+    }
+    if (category === "people") category = "characters";
     return `https://starwars-visualguide.com/assets/img/${category}/${cid}.jpg`;
   }
 
-  addComments(category,id) {
+  addComments(category, id) {
     //create dexiejs
   }
 }

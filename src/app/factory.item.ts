@@ -19,7 +19,7 @@ export var categoryFactory = (type:string)=>{
             return new Array<Vehicle>();    
         case 'species':
             return new Array<Species>();
-        case 'starship':
+        case 'starships':
             return new Array<Starship>();
     } 
 }

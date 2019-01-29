@@ -26,14 +26,18 @@ export class CategoryItemComponent implements OnInit {
   displayedColumns: string[] = ["name"];
 
   ngOnInit() {
-    this.subscription = this.starwarservice.item$.subscribe(
-      item => (this.category = item)
-    );
+    // this.subscription = this.starwarservice.item$.subscribe(
+    //   item => {
+    //     if(item)
+    //       this.category = item
+    //   }
+    // );
     this.categoryItems = categoryFactory(this.category.toString());
     this.starwarservice
       .getCategoryItems(this.category.toString(), this.pageCount)
       .then(result => {
         this.categoryItems = result;
+
         this.datasource=this.categoryItems;
         this.title=this.category.toString();
       });
@@ -53,14 +57,13 @@ export class CategoryItemComponent implements OnInit {
   }
   
   onNextPage(){
-    this.router.navigate(["categoryItems", this.route.params['_value']['cat'], this.pageCount]);
     this.pageCount++;
     this.starwarservice
       .getCategoryItems(this.category.toString(), this.pageCount)
       .then(result => {
         this.datasource = result;
       });
-    
+    this.router.navigate(["categoryItems", this.route.params['_value']['cat'], this.pageCount]);
   }
   onPreviousPage(){
     if(this.pageCount > 1 ){

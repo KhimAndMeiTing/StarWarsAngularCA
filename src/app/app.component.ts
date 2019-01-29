@@ -28,9 +28,6 @@ export class AppComponent {
     this.starwarservice.getCategoryItems('planets').then(result=>{
       this.data.push(result)
     })
-    
-    console.log('this.data')
-    console.log(this.data)
   }
 
   getItemDetails(){

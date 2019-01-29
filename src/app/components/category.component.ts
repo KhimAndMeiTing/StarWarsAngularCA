@@ -50,6 +50,5 @@ export class CategoryComponent {
     this.selectedRowIndex = row.name;
     this.starwarservice.setItemSelected(this.selectedRowIndex);
     this.router.navigate(["categoryItems", this.selectedRowIndex, 1]);
-    console.log(this.selectedRowIndex)
     }
 }
