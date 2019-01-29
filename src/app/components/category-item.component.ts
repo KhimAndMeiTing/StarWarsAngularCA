@@ -16,7 +16,7 @@ import { DataSource } from "@angular/cdk/table";
 export class CategoryItemComponent implements OnInit {
   //item: string[]=[];
   item: string;
-
+  title:string;
   category: Object;
   subscription: Subscription;
   pageSubscription: Subscription;
@@ -26,16 +26,16 @@ export class CategoryItemComponent implements OnInit {
   displayedColumns: string[] = ["name"];
 
   ngOnInit() {
-    // this.subscription = this.starwarservice.item$.subscribe(
-    //   item => (this.category = item)
-    // );
+    this.subscription = this.starwarservice.item$.subscribe(
+      item => (this.category = item)
+    );
     this.categoryItems = categoryFactory(this.category.toString());
     this.starwarservice
       .getCategoryItems(this.category.toString(), this.pageCount)
       .then(result => {
         this.categoryItems = result;
         this.datasource=this.categoryItems;
-        
+        this.title=this.category.toString();
       });
   }
 
