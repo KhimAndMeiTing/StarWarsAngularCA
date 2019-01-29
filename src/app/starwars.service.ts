@@ -71,9 +71,9 @@ export class StarWarsService {
   }
 
   getItemDetails(category = "films", page = 1, id = 2) {
-    console.log('id')
-    console.log(id)
+
     let cid = (page - 1) * 10 + id + 1;
+
     if (category === "planets") {
       if (cid > 0) cid++;
       if (cid == 61) cid = 1;
@@ -90,10 +90,62 @@ export class StarWarsService {
 
     if (category === "species") {
       if (cid > 0) cid = cid + 4;
-      // if(page < 4)
-      //   cid = 7 * (1) + 10 * (4 - page - 1) + (10 - id - 1)
-      // else
-      //   cid = 7 - id - 1
+      if (cid == 38) cid = 3;
+      if (cid == 39) cid = 2;
+      if (cid == 40) cid = 1;
+      if (cid == 41) cid = 4;
+
+    }
+
+    if (category === "vehicles") {
+      if (cid > 0) cid = cid + 3;
+      if (cid > 4) cid++;
+      if (cid > 8) cid = cid + 5;
+      if (cid > 14) cid++;
+      if (cid > 16) cid++;
+      if (cid > 20) cid = cid + 3;
+      if (cid > 26) cid = cid + 3;
+      if (cid > 30) cid = cid + 2;
+      if (cid > 38) cid = cid + 3;
+      if (cid > 42) cid++;
+      if (cid > 46) cid = cid + 3;
+      if (cid > 51) cid = cid + 8;
+      if (cid > 60) cid++;
+      if (cid > 62) cid = cid + 4;
+      if (cid > 67) cid++;
+      if (cid > 73) cid = cid + 2;
+      if (cid > 76) cid = 52 + (cid - 76);
+
+
+    }
+
+    if (category === "starships") {
+      if (cid > 1) cid = cid + 3;
+      if (cid > 5) cid = cid + 3;
+      if (cid > 13) cid = cid + 7;
+      if (cid > 23) cid = cid + 3;
+      if (cid > 29) cid++;
+      if (cid > 31) cid = cid + 7;
+      if (cid > 41) cid++;
+      if (cid > 43) cid = cid + 3;
+      if (cid == 50) cid = 3;
+      if (cid == 51) cid = 59;
+      if (cid == 52) cid = 61;
+      if (cid == 53) cid = 77;
+
+      if (cid == 56) cid = 52;
+      if (cid == 57) cid = 58;
+      if (cid == 58) cid = 63;
+      if (cid == 59) cid = 64;
+      if (cid == 60) cid = 65;
+      if (cid == 61) cid = 66;
+      if (cid == 62) cid = 74;
+      if (cid == 63) cid = 75;
+      if (cid == 64) cid = 2;
+      if (cid == 65) cid = 68;
+
+      console.log('cid')
+      console.log(cid)
     }
 
     if (items.length != 0) return Promise.resolve(items[id]);

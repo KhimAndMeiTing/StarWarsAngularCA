@@ -2,17 +2,20 @@
 <img style=" width:200px;
 height:200px;" src="{{ picture }}" />
 
-<table  width="60%" align="center" cellspacing="0" cellpadding="0">
+<table  width="60%" align="center" cellspacing="0" cellpadding="0" class="mat-elevation-z8">
   <tbody style="border: 1px solid black;">
     <tr *ngFor="let entry of itemDetails | keyvalue" style="border: 1px solid black;">
-      <td style="border: 1px solid rgba(192, 192, 192, 0.582); width:30% ">{{entry.key.charAt(0).toUpperCase() + entry.key.substr(1)}}</td>
+      <td style="border: 1px solid rgba(192, 192, 192, 0.582); width:30% ">{{formatPropertyColumnText(entry.key)}}</td>
       <td style="border: 1px solid rgba(192, 192, 192, 0.582);">
         <div *ngIf="isIterable(entry.value)">
-            <table >
+            <!-- <table >
                 <tr *ngFor="let prop of entry.value">
                     <td align="">{{prop}}</td>
                 </tr>
-              </table>
+              </table> -->
+              <div class="grid-container">
+                <div *ngFor="let prop of entry.value"> {{prop}}</div>
+              </div>
         </div>
         <div *ngIf="!isIterable(entry.value)">
           <td>{{entry.value}}</td>

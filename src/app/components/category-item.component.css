@@ -1,0 +1,19 @@
+.prev:hover{
+    animation: prev-animation linear 2s;
+    animation-iteration-count:  infinite;
+}
+
+@keyframes prev-animation{
+    0% {
+      opacity:1;
+    }
+    50% {
+      background-color: black
+    }
+    100% {
+      opacity:0.990099773451273;
+    }
+    101% {
+      opacity:0.99;
+    }
+}

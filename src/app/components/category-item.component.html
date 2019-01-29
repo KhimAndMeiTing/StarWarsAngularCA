@@ -12,14 +12,14 @@
 </table>
 </div>
 <div style="padding-top: 3em">
-    <button mat-raised-button color="accent" style="margin-right: 20px"
+    <button mat-raised-button class="prev" style="margin-right: 20px"
     (click)="onPreviousPage()" [disabled]="pageCount < 2">Previous</button>
-    <button mat-raised-button color="primary" style="margin-right: 20px"
+    <button mat-raised-button  style="margin-right: 20px"
     (click)="onNextPage()" >Next</button> 
     <!-- <button (click)="onPreviousPage()" [disabled]="pageCount < 2">Previous</button> -->
     <!-- <button (click)="onNextPage()" >Next</button> -->
 </div>
 <div style="padding-top: 1em">
-        <button mat-raised-button color="accent" style="margin-right: 20px"
+        <button mat-raised-button color="warn" style="margin-right: 20px"
         (click)="goToCategoryItems()" >Back to Categories</button>   
 </div>

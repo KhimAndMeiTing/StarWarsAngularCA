@@ -35,6 +35,11 @@ export class ItemDetailsComponent implements OnInit {
     this._location.back();
   }
 
+  formatPropertyColumnText(text:string){
+    return text.split('_').map((segment)=>{
+      segment.slice(0,1).toUpperCase() + segment.substr(1)
+    }).join(" ")
+  }
   
 
   isIterable = (object) => object != null && typeof object !== 'string' && typeof object[Symbol.iterator] === 'function'

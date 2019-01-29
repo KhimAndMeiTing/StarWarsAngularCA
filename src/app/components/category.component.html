@@ -1,10 +1,10 @@
+<h1 class="goldtextcss">Categories</h1>
 <div>
-        
         <table width="40%" align="center" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                 <ng-container matColumnDef="name">
                         <th align="center" mat-header-cell *matHeaderCellDef> Category. </th>
-                        <td  mat-cell *matCellDef="let element" 
-                         > {{element.name}} </td>
+                        <td  mat-cell *matCellDef="let element"
+                         > {{formatRowText(element.name)}} </td>
                 </ng-container>      
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"
                 ></tr>
