@@ -1,0 +1,73 @@
+{
+  "configVersion": 1,
+  "index": "https://KhimAndMeiTing.github.io/StarWarsAngularCA/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://KhimAndMeiTing.github.io/StarWarsAngularCA/favicon.ico",
+        "https://KhimAndMeiTing.github.io/StarWarsAngularCA/index.html",
+        "https://KhimAndMeiTing.github.io/StarWarsAngularCA/main.c9d4508084c4886c212c.js",
+        "https://KhimAndMeiTing.github.io/StarWarsAngularCA/polyfills.2f4a59095805af02bd79.js",
+        "https://KhimAndMeiTing.github.io/StarWarsAngularCA/runtime.a66f828dca56eeb90e02.js",
+        "https://KhimAndMeiTing.github.io/StarWarsAngularCA/scripts.03e042f1f102bf0e2ed8.js",
+        "https://KhimAndMeiTing.github.io/StarWarsAngularCA/styles.73a14d6a63cd918032b2.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/icons/Icon-144.png",
+        "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/icons/Icon-192.png",
+        "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/icons/Icon-36.png",
+        "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/icons/Icon-48.png",
+        "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/icons/Icon-512.png",
+        "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/icons/Icon-72.png",
+        "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/icons/Icon-96.png",
+        "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/star-wars-logo-gold.jpg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/icons/Icon-144.png": "5b80d00d16a838fbe6bc9b39d47cb874e3fd153e",
+    "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/icons/Icon-192.png": "c9e454a8a1db567ee240daa058eb40b0fa14f987",
+    "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/icons/Icon-36.png": "cd7529c3b6ba009ea796bee312c5eda65d075db9",
+    "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/icons/Icon-48.png": "17e43cc6c725ba8982f32192dd742c3413599680",
+    "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/icons/Icon-512.png": "eb6c28c17a679824f5468bdf69dbe2ac78e59e39",
+    "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/icons/Icon-72.png": "00b3278013a50e48f37dbb7edbeac3e400016330",
+    "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/icons/Icon-96.png": "241c597b47a5bcf0de2b7407526434f6be2b9080",
+    "https://KhimAndMeiTing.github.io/StarWarsAngularCA/assets/star-wars-logo-gold.jpg": "d0b42fe99c5a0c7132a40ecb826e472e06d2c293",
+    "https://KhimAndMeiTing.github.io/StarWarsAngularCA/favicon.ico": "74b2e698a85850f8b602a9fa1f9b5129bf235e5a",
+    "https://KhimAndMeiTing.github.io/StarWarsAngularCA/index.html": "90d2ea038cbf816a5130f2ea640d52c4d8810d60",
+    "https://KhimAndMeiTing.github.io/StarWarsAngularCA/main.c9d4508084c4886c212c.js": "462bcb57f282425f2d53e57adecac227d557f23a",
+    "https://KhimAndMeiTing.github.io/StarWarsAngularCA/polyfills.2f4a59095805af02bd79.js": "8949bb1b1e302dda246f6ed9c2da703270360b1f",
+    "https://KhimAndMeiTing.github.io/StarWarsAngularCA/runtime.a66f828dca56eeb90e02.js": "078e320cc6fdaf355836c3b1c52b059cdd33fc7e",
+    "https://KhimAndMeiTing.github.io/StarWarsAngularCA/scripts.03e042f1f102bf0e2ed8.js": "ba281a9af413e5f1a813cfd2d8b99dc9a0245b32",
+    "https://KhimAndMeiTing.github.io/StarWarsAngularCA/styles.73a14d6a63cd918032b2.css": "2ac20f4867c0e77e8632a424c50d4c618640c03b"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
