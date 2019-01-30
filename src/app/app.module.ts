@@ -25,6 +25,8 @@ import { ItemDetailsComponent } from './components/item-details.component';
 import { StarWarsService } from './starwars.service'
 import { RoutingModule } from './app.routing'
 import { KeysPipe } from './pipe.transform';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 export function getAuthServiceConfigs() {
   let config = new SocialServiceConfig()
@@ -60,7 +62,8 @@ export function getAuthServiceConfigs() {
     MatInputModule,
     MatSelectModule,
     MatSortModule,
-    Ng6SocialButtonModule
+    Ng6SocialButtonModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
  
   ],
   providers: [
