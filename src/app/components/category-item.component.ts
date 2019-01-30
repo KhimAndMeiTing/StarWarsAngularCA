@@ -89,4 +89,8 @@ export class CategoryItemComponent implements OnInit {
   goToCategoryItems(){
     this.router.navigate(["categories"]);
   }
+
+  formatTitleText(text:string){
+    return text === 'people' ? 'CHARACTERS' : text.toUpperCase()
+  }
 }

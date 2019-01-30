@@ -29,16 +29,24 @@ export class ItemDetailsComponent implements OnInit {
         this.title = itemdetail.name ? itemdetail.name : itemdetail.title
       })
     this.picture = this.starwarsservice.getPicture(this.item['category'], this.item['page'], this.item['id'])
+    console.log(this.formatPropertyColumnText('e_id'))
   }
 
   goBack(){
     this._location.back();
   }
 
+  formatTitleText(text:string){
+    return text.toUpperCase()
+  }
+
   formatPropertyColumnText(text:string){
-    return text.split('_').map((segment)=>{
-      segment.slice(0,1).toUpperCase() + segment.substr(1)
-    }).join(" ")
+    let arr = []
+    text.split('_')
+      .forEach((segment)=>{ 
+      arr.push(segment.slice(0,1).toUpperCase() + segment.substr(1))
+    })
+    return arr.join(" ")
   }
   
 

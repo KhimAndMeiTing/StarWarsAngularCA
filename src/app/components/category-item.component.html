@@ -1,9 +1,9 @@
 <div>
- <h1>{{title}}</h1>
+ <h1 class="goldtextcss">{{formatTitleText(title)}}</h1>
   <table width="40%" align="center" mat-table [dataSource]="datasource" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
             <th align="center" mat-header-cell *matHeaderCellDef> Name </th>
-            <td  mat-cell *matCellDef="let element; index as id" (click)="goToItemDetail(element.category, element.page , id)"
+            <td  mat-cell *matCellDef="let element; index as id" class=".goldtextcss" (click)="goToItemDetail(element.category, element.page , id)"
              > {{element.name}} </td>
     </ng-container>      
     <tr mat-header-row *matHeaderRowDef="displayedColumns"
@@ -14,7 +14,7 @@
 <div style="padding-top: 3em">
     <button mat-raised-button class="prev" style="margin-right: 20px"
     (click)="onPreviousPage()" [disabled]="pageCount < 2">Previous</button>
-    <button mat-raised-button  style="margin-right: 20px"
+    <button mat-raised-button class="next" style="margin-right: 20px"
     (click)="onNextPage()" >Next</button> 
     <!-- <button (click)="onPreviousPage()" [disabled]="pageCount < 2">Previous</button> -->
     <!-- <button (click)="onNextPage()" >Next</button> -->

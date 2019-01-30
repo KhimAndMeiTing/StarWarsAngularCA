@@ -1,11 +1,10 @@
-<h1>{{title}}</h1>
-<img style=" width:200px;
-height:200px;" src="{{ picture }}" />
+<h1 class="goldtextcss">{{title}}</h1>
+<img src="{{ picture }}" />
 
 <table  width="60%" align="center" cellspacing="0" cellpadding="0" class="mat-elevation-z8">
   <tbody style="border: 1px solid black;">
     <tr *ngFor="let entry of itemDetails | keyvalue" style="border: 1px solid black;">
-      <td style="border: 1px solid rgba(192, 192, 192, 0.582); width:30% ">{{formatPropertyColumnText(entry.key)}}</td>
+      <td class = "propcol">{{formatPropertyColumnText(entry.key)}}</td>
       <td style="border: 1px solid rgba(192, 192, 192, 0.582);">
         <div *ngIf="isIterable(entry.value)">
             <!-- <table >
@@ -14,7 +13,7 @@ height:200px;" src="{{ picture }}" />
                 </tr>
               </table> -->
               <div class="grid-container">
-                <div *ngFor="let prop of entry.value"> {{prop}}</div>
+                <div *ngFor="let prop of entry.value" style="border: 1px solid rgba(192, 192, 192, 0.582);"> {{prop}}</div>
               </div>
         </div>
         <div *ngIf="!isIterable(entry.value)">
@@ -25,7 +24,7 @@ height:200px;" src="{{ picture }}" />
   </tbody>
 </table>
 <div style="padding-top: 1em">
-    <button mat-raised-button color="accent" style="margin-right: 20px"
-    (click)="goBack()" >Back to Category</button>   
+    <button mat-raised-button color="warn" style="margin-right: 20px"
+    (click)="goBack()" >Back to {{this.item['category'] ? this.item['category'] : 'Category'}}</button>   
 </div>
 

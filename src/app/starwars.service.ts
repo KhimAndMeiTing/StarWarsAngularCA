@@ -185,8 +185,18 @@ export class StarWarsService {
             });
         });
         newItemDetail[key] = tempArray;
-      } else if (key !== "url") {
+      } else if (key !== "url" && !value.toString().match(/(http|https)/gm)) {
         newItemDetail[key] = itemDetailObj[key];
+      }
+      else{
+        this.http
+            .get(value.toString())
+            .toPromise()
+            .then(resp => {
+              resp["name"]
+                ? newItemDetail[key] = resp["name"]
+                : newItemDetail[key] = resp["title"];
+            });
       }
     });
     return newItemDetail;
