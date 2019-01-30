@@ -72,6 +72,73 @@ export class StarWarsService {
 
   getItemDetails(category = "films", page = 1, id = 2) {
 
+    let cid = this.getCorrectedId(category,page,id)
+
+    if (items.length != 0) return Promise.resolve(items[id]);
+    else {
+      let itemDetail = null;
+
+      return this.http
+        .get(BASE_URL + category + "/" + cid)
+        .toPromise()
+        .then(res => {
+          return (itemDetail = { ...res });
+        })
+        .then(result => {
+          itemDetail = this.getNames(result);
+          return this.getNames(result);
+        })
+        .then(newobj => {
+          return Promise.resolve(itemDetail);
+        })
+        .catch(err => console.log(err));
+    }
+  }
+
+  async getNames(itemDetailObj) {
+    let newItemDetail = {};
+    Object.entries(itemDetailObj).forEach(async ([key, value]) => {
+      if (Array.isArray(value)) {
+        var tempArray = [];
+        value.forEach(async url => {
+          this.http
+            .get(url)
+            .toPromise()
+            .then(resp => {
+              resp["name"]
+                ? tempArray.push(resp["name"])
+                : tempArray.push(resp["title"]);
+            });
+        });
+        newItemDetail[key] = tempArray;
+      } else if (key !== "url" && !value.toString().match(/(http|https)/gm)) {
+        newItemDetail[key] = itemDetailObj[key];
+      }
+      else{
+        this.http
+            .get(value.toString())
+            .toPromise()
+            .then(resp => {
+              resp["name"]
+                ? newItemDetail[key] = resp["name"]
+                : newItemDetail[key] = resp["title"];
+            });
+      }
+    });
+    return newItemDetail;
+  }
+
+  getPicture(category, page, id) {
+    let cid = this.getCorrectedId(category,page,id)
+    if (category === "people") category = "characters";
+    return `https://starwars-visualguide.com/assets/img/${category}/${cid}.jpg`;
+  }
+
+  addComments(category, id) {
+    //create dexiejs
+  }
+
+  getCorrectedId(category, page, id){
     let cid = (page - 1) * 10 + id + 1;
 
     if (category === "planets") {
@@ -143,79 +210,7 @@ export class StarWarsService {
       if (cid == 63) cid = 75;
       if (cid == 64) cid = 2;
       if (cid == 65) cid = 68;
-
-      console.log('cid')
-      console.log(cid)
     }
-
-    if (items.length != 0) return Promise.resolve(items[id]);
-    else {
-      let itemDetail = null;
-
-      return this.http
-        .get(BASE_URL + category + "/" + cid)
-        .toPromise()
-        .then(res => {
-          return (itemDetail = { ...res });
-        })
-        .then(result => {
-          itemDetail = this.getNames(result);
-          return this.getNames(result);
-        })
-        .then(newobj => {
-          return Promise.resolve(itemDetail);
-        })
-        .catch(err => console.log(err));
-    }
-  }
-
-  async getNames(itemDetailObj) {
-    let newItemDetail = {};
-    Object.entries(itemDetailObj).forEach(async ([key, value]) => {
-      if (Array.isArray(value)) {
-        var tempArray = [];
-        value.forEach(async url => {
-          this.http
-            .get(url)
-            .toPromise()
-            .then(resp => {
-              resp["name"]
-                ? tempArray.push(resp["name"])
-                : tempArray.push(resp["title"]);
-            });
-        });
-        newItemDetail[key] = tempArray;
-      } else if (key !== "url" && !value.toString().match(/(http|https)/gm)) {
-        newItemDetail[key] = itemDetailObj[key];
-      }
-      else{
-        this.http
-            .get(value.toString())
-            .toPromise()
-            .then(resp => {
-              resp["name"]
-                ? newItemDetail[key] = resp["name"]
-                : newItemDetail[key] = resp["title"];
-            });
-      }
-    });
-    return newItemDetail;
-  }
-
-  getPicture(category, page, id) {
-    let cid = (page - 1) * 10 + id + 1;
-    if (category === "people") {
-      if (cid > 16) cid++;
-      if (cid > 34) cid++;
-      if (cid > 46) cid++;
-      if (cid > 75) cid--;
-      if (cid == 89) cid = 35;
-    }
-    if (category === "people") category = "characters";
-    return `https://starwars-visualguide.com/assets/img/${category}/${cid}.jpg`;
-  }
-
-  addComments(category, id) {
-    //create dexiejs
+    return cid
   }
 }

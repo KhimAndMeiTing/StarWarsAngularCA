@@ -3,7 +3,8 @@
   <table width="40%" align="center" mat-table [dataSource]="datasource" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
             <th align="center" mat-header-cell *matHeaderCellDef> Name </th>
-            <td  mat-cell *matCellDef="let element; index as id" class=".goldtextcss" (click)="goToItemDetail(element.category, element.page , id)"
+            <td  mat-cell *matCellDef="let element; index as id" 
+                class=".goldtextcss" (click)="goToItemDetail(element.category, element.page,id)"
              > {{element.name}} </td>
     </ng-container>      
     <tr mat-header-row *matHeaderRowDef="displayedColumns"

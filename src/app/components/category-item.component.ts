@@ -77,14 +77,6 @@ export class CategoryItemComponent implements OnInit {
     }
   }
 
-  goToItemDetail(category:string, page=1, id){
-    this.starwarservice.setItemSelected({
-      category: category,
-      page: page,
-      id: id
-    });
-    this.router.navigate(["itemDetail"]);
-  }
 
   goToCategoryItems(){
     this.router.navigate(["categories"]);
@@ -92,5 +84,14 @@ export class CategoryItemComponent implements OnInit {
 
   formatTitleText(text:string){
     return text === 'people' ? 'CHARACTERS' : text.toUpperCase()
+  }
+  
+  goToItemDetail(category:string, page=1, id){
+    this.starwarservice.setItemSelected({
+      category: category,
+      page: page,
+      id: id
+    });
+    this.router.navigate(["itemDetail"]);
   }
 }

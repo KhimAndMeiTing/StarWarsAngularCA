@@ -5,15 +5,10 @@
   <tbody style="border: 1px solid black;">
     <tr *ngFor="let entry of itemDetails | keyvalue" style="border: 1px solid black;">
       <td class = "propcol">{{formatPropertyColumnText(entry.key)}}</td>
-      <td style="border: 1px solid rgba(192, 192, 192, 0.582);">
+      <td  class ="tdstyle">
         <div *ngIf="isIterable(entry.value)">
-            <!-- <table >
-                <tr *ngFor="let prop of entry.value">
-                    <td align="">{{prop}}</td>
-                </tr>
-              </table> -->
               <div class="grid-container">
-                <div *ngFor="let prop of entry.value" style="border: 1px solid rgba(192, 192, 192, 0.582);"> {{prop}}</div>
+                <div *ngFor="let prop of entry.value" class ="tdstyle"> {{prop}}</div>
               </div>
         </div>
         <div *ngIf="!isIterable(entry.value)">

@@ -14,7 +14,7 @@ export class CategoryComponent {
   dataSource;
   selectedRowIndex;
   shareObj = {
-    href: "http://localhost:4200/",
+    href: "https://khimandmeiting.github.io/StarWarsAngularCA/",
     hashtag: "#FACEBOOK-SHARE-HASGTAG"
   };
   constructor(

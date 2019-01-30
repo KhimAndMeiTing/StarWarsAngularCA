@@ -29,7 +29,6 @@ export class ItemDetailsComponent implements OnInit {
         this.title = itemdetail.name ? itemdetail.name : itemdetail.title
       })
     this.picture = this.starwarsservice.getPicture(this.item['category'], this.item['page'], this.item['id'])
-    console.log(this.formatPropertyColumnText('e_id'))
   }
 
   goBack(){

@@ -13,7 +13,6 @@ export class AppComponent {
   constructor(private router:Router, private _location: Location, private starwarservice: StarWarsService){}
 
   title = 'StarWarsAngularCA';
-  receivedName = '';
   data = []
   
   goToCategoryItem(){
@@ -30,11 +29,4 @@ export class AppComponent {
     })
   }
 
-  getItemDetails(){
-    this.starwarservice.getItemDetails('films',2 ,1)
-  }
-
-  receiveNameFromChild($event:string){
-    this.receivedName = $event
-  }
 }
